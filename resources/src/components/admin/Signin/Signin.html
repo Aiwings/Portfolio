@@ -1,0 +1,46 @@
+<Modal
+    title="Enregistrement"
+    @modalAction="signUp"
+    @modalClose="$emit('signupClose')"
+>
+    <form @submit.prevent="submit">
+        <Field
+            title="Nom"
+            type="text"
+            name="name"
+            icon="user"
+            placeholder="nom"
+            v-model="name"
+        ></Field>
+        <Field
+            title="Adresse email"
+            type="email"
+            name="email"
+            icon="user"
+            placeholder="email"
+            :message="message.email"
+            v-model="email"
+        ></Field>
+        <Field
+            title="Mot de passe"
+            type="password"
+            name="password"
+            icon="lock"
+            placeholder="mot de passe"
+            :message="message.password"
+            v-model="password"
+        ></Field>
+        <Field
+            title="Confirmer le mot de passe"
+            type="password"
+            name="passwordconf"
+            :message="message.passwordconf"
+            icon="lock"
+            placeholder="confirmer le mot de passe"
+            v-model="passwordconf"
+        ></Field>
+    </form>
+    <div v-if="message.global" :class="status.global">
+        <div class="message-body">{{ message.global }}</div>
+    </div>
+</Modal>

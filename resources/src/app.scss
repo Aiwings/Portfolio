@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+//Importing Oxygen Font
+@import "https://fonts.googleapis.com/css2?family=Oxygen&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Oxygen&family=Roboto:wght@300&display=swap";
+
+//Importing Variables
+//@import "./variables.scss";
+
+//Importing Bulma Files
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/title.sass";
+@import "~bulma/sass/form/_all.sass";
+@import "~bulma/sass/components/modal.sass";
+@import "~bulma/sass/components/tabs.sass";
+@import "~bulma/sass/components/navbar.sass";
+@import "~bulma/sass/components/message.sass";
+@import "~bulma/sass/components/panel.sass";
+@import "~bulma/sass/layout/_all.sass";
+@import "~bulma/sass/helpers/_all.sass";
+
+html {
+    overflow-y: hidden;
+}
+.iconsvg {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
+
+.delete {
+    color: $danger;
+}

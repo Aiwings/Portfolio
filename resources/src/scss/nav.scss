@@ -1,0 +1,16 @@
+@media screen and (max-width: 1023px) {
+    /**
+     Fade-in transition when  opening collapsed  menu
+    */
+    #main-nav .navbar-menu {
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        display: block;
+        transition: height 1.5s, opacity 1.5s linear;
+    }
+    #main-nav .navbar-menu.is-active {
+        height: auto;
+        opacity: 1;
+    }
+}
