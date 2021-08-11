@@ -1,5 +1,5 @@
 <template>
-  <editor :init="init" />
+  <editor :init="init" v-model="content" />
 </template>
 
 <script>

@@ -12,9 +12,9 @@ class PageController extends Controller
         return Page::all();
     }
 
-    public function show($name)
+    public function show(string $slug)
     {
-        return Page::where("name", $name)->first();
+        return Page::where("slug", $slug)->first();
     }
 
     public function store(Request $request)
@@ -22,16 +22,16 @@ class PageController extends Controller
         return Page::create($request->all());
     }
 
-    public function update(Request $request, $name)
+    public function update(Request $request, string $slug)
     {
-        $page = Page::where("name", $name)->first();
+        $page = Page::where("slug", $slug)->first();
         $page->update($request->all());
         return $page;
     }
 
-    public function delete(Request $request, $name)
+    public function delete(Request $request, string $slug)
     {
-        $page = Page::where("name", $name)->first();
+        $page = Page::where("slug", $slug)->first();
         $page->delete();
 
         return 204;
