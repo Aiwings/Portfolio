@@ -24,6 +24,8 @@
         "@tinymce/tinymce-vue": "^4.0.4",
         "bulma": "^0.9.3",
         "laravel-mix-svg-vue": "^0.3.6",
+        "tinymce": "^5.8.2",
+        "tinymce-vue": "^1.0.0",
         "vue-router": "^4.0.11",
         "webpack": "^5.49.0"
     }

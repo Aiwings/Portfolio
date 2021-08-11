@@ -14,6 +14,7 @@
     <div id="app">
         <admin></admin>
     </div>
+    <!-- <script src="/js/tinymce/tinymce.min.js"></script> -->
     <script src="js/manifest.js"></script>
     <script src="js/vendor.js"></script>
     <script src="js/admin.js"></script>
