@@ -19,6 +19,8 @@ class AuthController extends Controller
         $loginInfos = $request->only('email', "password");
         if (Auth::attempt($loginInfos)) {
             return $this->updateToken($request["email"]);
+        } else {
+            return ["success" => false];
         }
     }
     public function signUp(Request $request)
@@ -47,6 +49,9 @@ class AuthController extends Controller
         $user = User::where('email', $email)->first();
         $user->api_token = hash('sha256', $token);
         $user->save();
-        return ["token" => $token];
+        return [
+            "token" => $token,
+            "success" => true
+        ];
     }
 }

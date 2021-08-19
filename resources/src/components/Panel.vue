@@ -1,22 +1,23 @@
 <template>
   <article class="panel is-primary">
-    <p class="panel-heading">{{ heading }}</p>
-    <div
-      class="panel-block"
-      v-for="block in blocks"
-      v-bind:key="block"
-      v-on="block.link ? { click: $emit('goTo', block.link) } : {}"
-    >
-      {{ block.content }}
+    <div class="panel-heading">
+      <a v-if="hasPrev" href="" @click="$emit('prevClicked')" class="is-light">
+        <svg-vue class="iconsvg arrow-left" icon="arrow-left"></svg-vue>
+      </a>
+      {{ heading }}
     </div>
-    <div class="panel-block" v-if="hasButton">
-      <button
-        v-on:click="buttonClicked"
-        class="button is-link is-outlined is-fullwidth"
+    <div class="panel-tabs" v-if="tabs">
+      <router-link
+        v-for="tab in tabs"
+        v-bind:key="tab"
+        :to="tab.to"
+        @click="$emit('changeTab', tab.id)"
+        :class="activeTab == tab.id ? 'is-active' : ''"
       >
-        AJouter du contenu
-      </button>
+        {{ tab.text }}
+      </router-link>
     </div>
+    <slot></slot>
   </article>
 </template>
 
@@ -27,19 +28,16 @@ export default {
       type: String,
       required: true,
     },
-    hasButton: {
-      type: Boolean,
+    activeTab: {
+      type: Number,
+      required: true,
     },
-    blocks: {
+    hasPrev: {
+      type: Boolean,
+      default: false,
+    },
+    tabs: {
       type: Array,
-      default() {
-        return [
-          {
-            link: "",
-            content: "No content availlable",
-          },
-        ];
-      },
     },
   },
   methods: {
@@ -47,9 +45,12 @@ export default {
       this.$emit("newItem");
     },
   },
-  emits: ["goTo", "newItem"],
+  emits: ["changeTab", "prevClicked"],
 };
 </script>
 
 <style>
+.panel-heading a {
+  margin-right: 20px;
+}
 </style>

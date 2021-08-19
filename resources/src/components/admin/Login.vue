@@ -21,7 +21,7 @@
         placeholder="mot de passe"
         v-model="form.password"
       ></Field>
-      <div v-if="message" :class="is - warning">
+      <div v-if="message" class="is-warning">
         <div class="message-body">{{ message }}</div>
       </div>
     </form>
@@ -50,11 +50,20 @@ export default {
   },
   methods: {
     async login() {
-      const ajax = new Ajax();
       try {
-        const login = await ajax.post("/admin/login", this.form);
-        document.cookie = JSON.stringify(login);
-        console.log("logged in");
+        let ajax = new Ajax();
+        const login = await ajax.post("/api/login", this.form);
+        if (login.success) {
+          let cookieString = `token=${login.token};`;
+          cookieString += "samesite=lax;";
+          let maxAge = 7 * 24 * 60 * 60;
+          cookieString += `max-age=${maxAge};`;
+          cookieString += "secure;";
+          document.cookie = cookieString;
+          console.log("logged in", login.token);
+        } else {
+          throw new Error();
+        }
       } catch (error) {
         console.log(error.message);
         this.message = "La Connexion a échouée";

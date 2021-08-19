@@ -6,48 +6,69 @@ import Project from "../components/admin/Project.vue";
 import Articles from "../components/admin/Articles.vue";
 import Article from "../components/admin/Article.vue";
 import Home from "../components/admin/Home.vue";
+import Sections from "../components/admin/Sections";
+import PageInfos from "../components/admin/PageInfos";
+import PageBlocks from "../components/admin/PageBlocks";
 const routes = [
-    { path: "/admin", name: "admin-home", component: Home },
-    {
-        path: "/admin/blogs",
-        name: "articles",
-        component: Articles,
-        children: [
-            {
-                path: ":name",
-                name: "article-edit",
-                component: Article,
-            },
-        ],
-    },
-    {
-        path: "/admin/pages",
-        name: "pages",
-        component: Pages,
-        children: [
-            {
-                path: ":name",
-                name: "page-edit",
-                component: Page,
-                props: true,
-            },
-        ],
-    },
-    {
-        path: "/admin/projects",
-        name: "projects",
-        component: Projects,
-        children: [
-            {
-                path: ":name",
-                name: "project-edit",
-                component: Project,
-            },
-        ],
-    },
+  { path: "/admin", name: "admin-home", component: Home },
+  {
+    path: "/admin/blogs",
+    name: "articles",
+    component: Articles,
+    children: [
+      {
+        path: ":name",
+        name: "article-edit",
+        component: Article,
+      },
+    ],
+  },
+  {
+    path: "/admin/pages",
+    name: "pages",
+    component: Pages,
+  },
+  {
+    path: "/admin/page/:id-:name",
+    name: "page-edit",
+    component: Page,
+    props: (route) => ({
+      id: parseInt(route.params.id),
+      name: route.params.name,
+    }),
+    children: [
+      {
+        path: "",
+        name: "page-infos",
+        component: PageInfos,
+      },
+      {
+        path: "sections",
+        name: "sections",
+        component: Sections,
+      },
+      {
+        path: "blocks",
+        name: "page-blocks",
+        component: PageBlocks,
+      },
+    ],
+  },
+  {
+    path: "/admin/projects",
+    name: "projects",
+    component: Projects,
+    children: [
+      {
+        path: ":name",
+        name: "project-edit",
+        component: Project,
+      },
+    ],
+  },
 ];
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes,
 });
 export default router;

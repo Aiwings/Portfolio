@@ -10,6 +10,9 @@ class SectionController extends Controller
     public function index(int $pageId){
         return Section::where("page_ID",$pageId);
     }
+    public function show(string $slug){
+        return Section::where("slug", $slug)->first();
+    }
 
     public function store(Request $request) {
         return Section::create($request->all());

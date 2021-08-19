@@ -12,9 +12,9 @@ class PageController extends Controller
         return Page::all();
     }
 
-    public function show(string $slug)
+    public function show(int $id)
     {
-        return Page::where("slug", $slug)->first();
+        return Page::find($id);
     }
 
     public function store(Request $request)

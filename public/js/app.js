@@ -16081,6 +16081,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/svg/arrow-left.svg":
+/*!**************************************!*\
+  !*** ./resources/svg/arrow-left.svg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"m12.586 27.414-10-10a2 2 0 0 1 0-2.828l10-10a2 2 0 1 1 2.828 2.828L8.828 14H28a2 2 0 1 1 0 4H8.828l6.586 6.586c.39.39.586.902.586 1.414s-.195 1.024-.586 1.414a2 2 0 0 1-2.828 0z\"/></svg>");
+
+/***/ }),
+
+/***/ "./resources/svg/arrow-right.svg":
+/*!***************************************!*\
+  !*** ./resources/svg/arrow-right.svg ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"m12.586 27.414-10-10a2 2 0 0 1 0-2.828l10-10a2 2 0 1 1 2.828 2.828L8.828 14H28a2 2 0 1 1 0 4H8.828l6.586 6.586c.39.39.586.902.586 1.414s-.195 1.024-.586 1.414a2 2 0 0 1-2.828 0z\"/></svg>");
+
+/***/ }),
+
 /***/ "./resources/svg/cancel-circle.svg":
 /*!*****************************************!*\
   !*** ./resources/svg/cancel-circle.svg ***!
@@ -16700,6 +16730,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./arrow-left.svg": "./resources/svg/arrow-left.svg",
+	"./arrow-right.svg": "./resources/svg/arrow-right.svg",
 	"./cancel-circle.svg": "./resources/svg/cancel-circle.svg",
 	"./icons.svg": "./resources/svg/icons.svg",
 	"./lock.svg": "./resources/svg/lock.svg",

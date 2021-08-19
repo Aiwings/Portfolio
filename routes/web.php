@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
+
+/*
+/ Routes for admin 
+/ Redirects to the admin blade
+/ The Vue router handles the redirections
+*/
 Route::get('/admin', [AdminController::class, 'index']);
-Route::post('/admin/login', [AuthController::class, 'login']);
-Route::post('/admin/signup', [AuthController::class, 'signUp']);
+Route::get('/admin/pages', [AdminController::class, 'index']);
+Route::get('/admin/page/{slug}', [AdminController::class, 'index']);
+Route::get('/admin/projects', [AdminController::class, 'index']);
+Route::get('/admin/projects/{slug}', [AdminController::class, 'index']);

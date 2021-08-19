@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <label :for="name" class="label">{{ title }}</label>
-    <div class="control has-icons-left">
+    <div :class="'control' + icon ? 'has-icons-left' : ''">
       <input
         :type="type"
         :name="name"
