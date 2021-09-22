@@ -29,12 +29,11 @@ const routes = [
     component: Pages,
   },
   {
-    path: "/admin/page/:id-:name",
+    path: "/admin/page/:id",
     name: "page-edit",
     component: Page,
     props: (route) => ({
       id: parseInt(route.params.id),
-      name: route.params.name,
     }),
     children: [
       {

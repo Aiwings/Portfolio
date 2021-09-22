@@ -87,7 +87,7 @@ export default {
         password: this.password,
       };
       let ajax = new Ajax();
-      const signin = await ajax.post("/api/signup", infos);
+      const signin = await ajax.request("/api/signup", "POST", infos);
       console.log(signin);
     },
   },

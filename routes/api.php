@@ -22,17 +22,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/**
+ * Routes for custom Authentification
+ */
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signUp']);
 
+/**
+ ** CRUD For the Pages and their Sections
+ *  Sections are HTML Text content
+ */
 Route::get("/pages", [PageController::class, "index"]);
 Route::get("/page/{id}", [PageController::class, "show"]);
-Route::post("/pages", [PageController::class, "store"]);
-Route::put("/page/{name}", [PageController::class, "update"]);
-Route::delete("/page/{name}", [PageController::class, "delete"]);
-
 Route::get("/page/{pageId}/sections", [SectionController::class, "index"]);
-Route::get("/section/{slug}", [SectionController::class, "show"]);
-Route::post("/sections", [SectionController::class, "store"]);
-Route::put("/section/{slug}", [SectionController::class, "update"]);
-Route::delete("/section/{name}", [SectionController::class, "delete"]);
+Route::get("/section/{id}", [SectionController::class, "show"]);
+
+/**
+ * Authentifications using user API Token via Included Middleware
+ */
+Route::middleware('auth:api')->post('/pages', [PageController::class, "store"]);
+Route::middleware('auth:api')->put("/page/{id}", [PageController::class, "update"]);
+Route::middleware('auth:api')->delete("/page/{id}", [PageController::class, "delete"]);
+
+Route::middleware('auth:api')->post("/sections", [SectionController::class, "store"]);
+Route::middleware('auth:api')->put("/section/{id}", [SectionController::class, "update"]);
+Route::middleware('auth:api')->delete("/section/{id}", [SectionController::class, "delete"]);

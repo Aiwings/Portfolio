@@ -37,7 +37,14 @@
             <button class="button is-dark" @click="$emit('showSignUp')">
               S'inscrire
             </button>
-            <button class="button is-dark" @click="$emit('showLogin')">
+            <button
+              v-if="isConnected"
+              class="button is-dark"
+              @click="$emit('disconnect')"
+            >
+              Se Déconnecter
+            </button>
+            <button v-else class="button is-dark" @click="$emit('showLogin')">
               Se Connecter
             </button>
           </div>
@@ -48,6 +55,12 @@
 </template>
 <script>
 export default {
+  props: {
+    isConnected: {
+      type: Boolean,
+      default: false,
+    },
+  },
   emits: ["showLogin", "showSignUp"],
   data() {
     return {

@@ -4,7 +4,7 @@
     <div class="select is-medium">
       <select @change="goTo($event.target.value)">
         <option v-for="page in pages" v-bind:key="page" :value="page.id">
-          {{ page.name }}
+          {{ page.title }}
         </option>
       </select>
     </div>
@@ -21,40 +21,36 @@ export default {
       pages: [
         {
           id: 0,
-          name: "Selectionner la page",
+          title: "Selectionner la page",
         },
       ],
     };
   },
   async created() {
-    console.log(Ajax);
     try {
       const ajax = new Ajax();
-      const resp = await ajax.get("/api/pages");
-      this.pages.concat(resp.data);
+      const resp = await ajax.request("/api/pages");
+      this.pages = this.pages.concat(resp);
     } catch (err) {
       alert(err.message);
     }
   },
   methods: {
     goTo(id) {
+      console.log(id);
       let page = {};
       if (id == 0) {
         page.id = 0;
-        let name = prompt("Nom de la nouvelle page", "");
-        if (name !== null || name !== "") {
-          page["name"] = name;
-        }
+        page.title = "Nouvelle page";
       } else {
-        page = this.pages.filter((el) => {
-          el.id = id;
-        })[0];
-        console.log(page);
+        page = this.pages.filter((el) => parseInt(el.id) === parseInt(id))[0];
+        this.$route.meta["page"] = page;
+        console.log(this.$route.meta);
       }
 
       this.$router.push({
-        name: "page-infos",
-        params: { id: id, name: page.name },
+        name: "page-edit",
+        params: { id: id, page: JSON.stringify(page) },
       });
     },
   },

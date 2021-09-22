@@ -38,7 +38,7 @@ export default {
     }
     try {
       let ajax = new Ajax();
-      let req = await ajax.get(`/api/page/${pageId}/sections`);
+      let req = await ajax.request(`/api/page/${pageId}/sections`);
       this.sections.concat(req);
     } catch (err) {
       alert(err.message);

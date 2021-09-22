@@ -17869,9 +17869,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    heading: {
-      type: String,
-      required: true
+    title: {
+      type: String
     },
     activeTab: {
       type: Number,
@@ -17885,6 +17884,7 @@ __webpack_require__.r(__webpack_exports__);
       type: Array
     }
   },
+  computed: {},
   methods: {
     buttonClicked: function buttonClicked() {
       this.$emit("newItem");
@@ -17906,25 +17906,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Nav_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Nav.vue */ "./resources/src/components/admin/Nav.vue");
-/* harmony import */ var _Signin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Signin */ "./resources/src/components/admin/Signin/index.js");
-/* harmony import */ var _Login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login.vue */ "./resources/src/components/admin/Login.vue");
+/* harmony import */ var _ajax__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/ajax */ "./resources/src/ajax/index.js");
+/* harmony import */ var _Nav_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Nav.vue */ "./resources/src/components/admin/Nav.vue");
+/* harmony import */ var _Signin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Signin */ "./resources/src/components/admin/Signin/index.js");
+/* harmony import */ var _Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Login.vue */ "./resources/src/components/admin/Login.vue");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    "nav-admin": _Nav_vue__WEBPACK_IMPORTED_MODULE_0__.default,
-    Signin: _Signin__WEBPACK_IMPORTED_MODULE_1__.default,
-    Login: _Login_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    "nav-admin": _Nav_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    Signin: _Signin__WEBPACK_IMPORTED_MODULE_2__.default,
+    Login: _Login_vue__WEBPACK_IMPORTED_MODULE_3__.default
   },
   data: function data() {
     return {
       loginShown: false,
-      signupShown: false
+      signupShown: false,
+      isConnected: false
     };
   },
-  methods: {}
+  created: function created() {
+    var cookie = _ajax__WEBPACK_IMPORTED_MODULE_0__.default.getCookie("token");
+    console.log(cookie);
+    this.isConnected = cookie !== undefined;
+  },
+  methods: {
+    onLogin: function onLogin() {
+      this.isConnected = true;
+      this.loginShown = false;
+    }
+  }
 });
 
 /***/ }),
@@ -18004,7 +18017,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     Field: _Field__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  emits: ["loginClose"],
+  emits: ["loginClose", "connected"],
   data: function data() {
     return {
       show: true,
@@ -18028,13 +18041,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 0;
                 ajax = new _ajax__WEBPACK_IMPORTED_MODULE_3__.default();
                 _context.next = 4;
-                return ajax.post("/api/login", _this.form);
+                return ajax.request("/api/login", "POST", _this.form);
 
               case 4:
                 login = _context.sent;
 
                 if (!login.success) {
-                  _context.next = 15;
+                  _context.next = 16;
                   break;
                 }
 
@@ -18045,28 +18058,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 cookieString += "secure;";
                 document.cookie = cookieString;
                 console.log("logged in", login.token);
-                _context.next = 16;
-                break;
 
-              case 15:
-                throw new Error();
+                _this.$emit("connected");
+
+                _context.next = 17;
+                break;
 
               case 16:
-                _context.next = 22;
+                throw new Error();
+
+              case 17:
+                _context.next = 23;
                 break;
 
-              case 18:
-                _context.prev = 18;
+              case 19:
+                _context.prev = 19;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0.message);
                 _this.message = "La Connexion a échouée";
 
-              case 22:
+              case 23:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 18]]);
+        }, _callee, null, [[0, 19]]);
       }))();
     }
   }
@@ -18086,6 +18102,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    isConnected: {
+      type: Boolean,
+      "default": false
+    }
+  },
   emits: ["showLogin", "showSignUp"],
   data: function data() {
     return {
@@ -18112,41 +18134,142 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Panel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Panel.vue */ "./resources/src/components/Panel.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Panel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Panel.vue */ "./resources/src/components/Panel.vue");
+/* harmony import */ var _ajax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/ajax */ "./resources/src/ajax/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: {
       type: Number,
       "default": 0
-    },
-    name: {
-      type: String,
-      "default": "name"
     }
   },
   data: function data() {
     return {
+      page: {
+        slug: "",
+        description: "",
+        title: "test"
+      },
       active: 0,
       tabs: [{
         id: 0,
         text: "Informations",
-        to: "/admin/page/".concat(this.id, "-").concat(this.name, "/")
+        to: "/admin/page/".concat(this.id, "/")
       }, {
         id: 1,
         text: "Sections",
-        to: "/admin/page/".concat(this.id, "-").concat(this.name, "/sections")
+        to: "/admin/page/".concat(this.id, "/sections")
       }, {
         id: 2,
         text: "Blocks",
-        to: "/admin/page/".concat(this.id, "-").concat(this.name, "/blocks")
+        to: "/admin/page/".concat(this.id, "/blocks")
       }]
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var jsonpage, ajax, resp;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (!(_this.id === 0)) {
+                _context.next = 2;
+                break;
+              }
+
+              return _context.abrupt("return");
+
+            case 2:
+              jsonpage = _this.$route.params["page"];
+
+              if (!jsonpage) {
+                _context.next = 7;
+                break;
+              }
+
+              _this.page = JSON.parse(jsonpage);
+              _context.next = 18;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              ajax = new _ajax__WEBPACK_IMPORTED_MODULE_2__.default();
+              _context.next = 11;
+              return ajax.request("/api/page/".concat(_this.id));
+
+            case 11:
+              resp = _context.sent;
+              _this.page = resp;
+              _context.next = 18;
+              break;
+
+            case 15:
+              _context.prev = 15;
+              _context.t0 = _context["catch"](7);
+              console.error(_context.t0.message);
+
+            case 18:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[7, 15]]);
+    }))();
   },
   computed: {},
   methods: {
     tabChange: function tabChange(tabId) {
       this.active = tabId;
+    },
+    pageChanged: function pageChanged(editedPage) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var ajax, url, method, req;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                console.log("pageChange page");
+                _this2.page = editedPage;
+                ajax = new _ajax__WEBPACK_IMPORTED_MODULE_2__.default(true);
+                url = _this2.id === 0 ? "/api/pages" : "/api/page/".concat(_this2.id);
+                method = _this2.id === 0 ? "POST" : "PUT";
+                _context2.prev = 5;
+                _context2.next = 8;
+                return ajax.request(url, method, editedPage);
+
+              case 8:
+                req = _context2.sent;
+                console.log(req);
+                _context2.next = 15;
+                break;
+
+              case 12:
+                _context2.prev = 12;
+                _context2.t0 = _context2["catch"](5);
+                alert(_context2.t0.message);
+
+              case 15:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[5, 12]]);
+      }))();
     },
     prev: function prev() {
       this.$router.replace({
@@ -18155,7 +18278,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    panel: _Panel_vue__WEBPACK_IMPORTED_MODULE_0__.default
+    panel: _Panel_vue__WEBPACK_IMPORTED_MODULE_1__.default
   }
 });
 
@@ -18193,14 +18316,20 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Field: _Field__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  data: function data() {
-    return {
-      title: "",
-      description: ""
-    };
+  props: {
+    page: {
+      type: Object,
+      "default": {
+        title: "Nouvelle Page",
+        slug: "",
+        description: ""
+      }
+    }
   },
   methods: {
-    submit: function submit() {}
+    submit: function submit() {
+      this.$emit("pageChanged", this.page);
+    }
   },
   computed: {}
 });
@@ -18233,7 +18362,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       pages: [{
         id: 0,
-        name: "Selectionner la page"
+        title: "Selectionner la page"
       }]
     };
   },
@@ -18246,56 +18375,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log(_ajax__WEBPACK_IMPORTED_MODULE_1__.default);
-              _context.prev = 1;
+              _context.prev = 0;
               ajax = new _ajax__WEBPACK_IMPORTED_MODULE_1__.default();
-              _context.next = 5;
-              return ajax.get("/api/pages");
+              _context.next = 4;
+              return ajax.request("/api/pages");
 
-            case 5:
+            case 4:
               resp = _context.sent;
-
-              _this.pages.concat(resp.data);
-
-              _context.next = 12;
+              _this.pages = _this.pages.concat(resp);
+              _context.next = 11;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](0);
               alert(_context.t0.message);
 
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9]]);
+      }, _callee, null, [[0, 8]]);
     }))();
   },
   methods: {
     goTo: function goTo(id) {
+      console.log(id);
       var page = {};
 
       if (id == 0) {
         page.id = 0;
-        var name = prompt("Nom de la nouvelle page", "");
-
-        if (name !== null || name !== "") {
-          page["name"] = name;
-        }
+        page.title = "Nouvelle page";
       } else {
         page = this.pages.filter(function (el) {
-          el.id = id;
+          return parseInt(el.id) === parseInt(id);
         })[0];
-        console.log(page);
+        this.$route.meta["page"] = page;
+        console.log(this.$route.meta);
       }
 
       this.$router.push({
-        name: "page-infos",
+        name: "page-edit",
         params: {
           id: id,
-          name: page.name
+          page: JSON.stringify(page)
         }
       });
     }
@@ -18387,7 +18511,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.prev = 3;
               ajax = new _ajax__WEBPACK_IMPORTED_MODULE_1__.default();
               _context.next = 7;
-              return ajax.get("/api/page/".concat(pageId, "/sections"));
+              return ajax.request("/api/page/".concat(pageId, "/sections"));
 
             case 7:
               req = _context.sent;
@@ -18542,7 +18666,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 };
                 ajax = new _ajax__WEBPACK_IMPORTED_MODULE_3__.default();
                 _context.next = 8;
-                return ajax.post("/api/signup", infos);
+                return ajax.request("/api/signup", "POST", infos);
 
               case 8:
                 signin = _context.sent;
@@ -18598,7 +18722,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 9
   /* TEXT, PROPS */
   , ["for"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-    "class": 'control' + $props.icon ? 'has-icons-left' : 0
+    "class": 'control ' + ($props.icon ? 'has-icons-left' : '')
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: $props.type,
     name: $props.name,
@@ -18733,7 +18857,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_svg_vue, {
     "class": "iconsvg arrow-left",
     icon: "arrow-left"
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.heading), 1
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
   /* TEXT */
   )]), $props.tabs ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tabs, function (tab) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
@@ -18793,13 +18917,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onShowSignUp: _cache[2] || (_cache[2] = function ($event) {
       return $data.signupShown = true;
-    })
-  }), $data.loginShown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Login, {
+    }),
+    isConnected: $data.isConnected
+  }, null, 8
+  /* PROPS */
+  , ["isConnected"]), $data.loginShown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Login, {
     key: 0,
     onLoginClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.loginShown = false;
-    })
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.signupShown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Signin, {
+    }),
+    onConnected: $options.onLogin
+  }, null, 8
+  /* PROPS */
+  , ["onConnected"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.signupShown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Signin, {
     key: 1,
     onSignupClose: _cache[4] || (_cache[4] = function ($event) {
       return $data.signupShown = false;
@@ -19076,12 +19206,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return _ctx.$emit('showSignUp');
     })
-  }, " S'inscrire "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  }, " S'inscrire "), $props.isConnected ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+    key: 0,
     "class": "button is-dark",
     onClick: _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.$emit('disconnect');
+    })
+  }, " Se Déconnecter ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+    key: 1,
+    "class": "button is-dark",
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return _ctx.$emit('showLogin');
     })
-  }, " Se Connecter ")])])])], 2
+  }, " Se Connecter "))])])])], 2
   /* CLASS */
   )])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
@@ -19109,7 +19246,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_panel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("panel");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_panel, {
-    heading: $props.name,
+    title: $data.page.title,
     tabs: $data.tabs,
     activeTab: $data.active,
     onChangeTab: $options.tabChange,
@@ -19117,14 +19254,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onPrevClicked: $options.prev
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, {
+        page: $data.page,
+        onPageChanged: $options.pageChanged
+      }, null, 8
+      /* PROPS */
+      , ["page", "onPageChanged"])];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["heading", "tabs", "activeTab", "onChangeTab", "onPrevClicked"]);
+  , ["title", "tabs", "activeTab", "onChangeTab", "onPrevClicked"]);
 }
 
 /***/ }),
@@ -19166,7 +19308,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "class": "label",
   "for": "description"
-}, "Meta description de la page ", -1
+}, "Meta description de la page (250 caractères max) ", -1
 /* HOISTED */
 );
 
@@ -19183,7 +19325,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Field = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Field");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("article", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submit && $options.submit.apply($options, arguments);
     }, ["prevent"])),
     "class": "box"
@@ -19191,16 +19333,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "title",
     title: "Titre de la page",
     type: "text",
-    modelValue: $data.title,
+    modelValue: $props.page.title,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.title = $event;
+      return $props.page.title = $event;
+    })
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Field, {
+    name: "slug",
+    title: "Nom de la page - affiché dans l'URL",
+    type: "text",
+    modelValue: $props.page.slug,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $props.page.slug = $event;
     })
   }, null, 8
   /* PROPS */
   , ["modelValue"]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
     name: "description",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.description = $event;
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $props.page.description = $event;
     }),
     cols: "30",
     rows: "10",
@@ -19208,7 +19360,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "meta-description"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.description]]), _hoisted_3], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.page.description]]), _hoisted_3], 32
   /* HYDRATE_EVENTS */
   )]);
 }
@@ -19260,7 +19412,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("option", {
       key: page,
       value: page.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(page.name), 9
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(page.title), 9
     /* TEXT, PROPS */
     , ["value"]);
   }), 128
@@ -19501,6 +19653,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -19517,93 +19681,94 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var Ajax = /*#__PURE__*/function () {
   function Ajax() {
+    var needsLogin = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
     _classCallCheck(this, Ajax);
 
     var crsf = document.querySelector('meta[name="csrf-token"]');
     var headers = {
-      "X-CSRF-TOKEN": crsf.content
+      "X-CSRF-TOKEN": crsf.content,
+      Accept: "application/json"
     };
+
+    if (needsLogin) {
+      var token = Ajax.getCookie("token");
+      headers["Authorization"] = "Bearer " + token;
+    }
+
     this.axios = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
       headers: headers
     });
   }
 
   _createClass(Ajax, [{
-    key: "post",
+    key: "request",
     value: function () {
-      var _post = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(url, data) {
-        var req, json;
+      var _request = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(url) {
+        var method,
+            data,
+            confObj,
+            req,
+            json,
+            _args = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return this.axios.post(url, data);
+                method = _args.length > 1 && _args[1] !== undefined ? _args[1] : "GET";
+                data = _args.length > 2 && _args[2] !== undefined ? _args[2] : null;
+                confObj = {
+                  method: method,
+                  url: url
+                };
 
-              case 3:
+                if (data) {
+                  confObj["data"] = data;
+                }
+
+                _context.prev = 4;
+                _context.next = 7;
+                return this.axios(confObj);
+
+              case 7:
                 req = _context.sent;
                 json = req.data;
                 return _context.abrupt("return", json);
 
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](0);
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](4);
                 console.log(_context.t0.message);
                 throw new Error("Erreur lors de la requête");
 
-              case 12:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee, this, [[4, 12]]);
       }));
 
-      function post(_x, _x2) {
-        return _post.apply(this, arguments);
+      function request(_x) {
+        return _request.apply(this, arguments);
       }
 
-      return post;
+      return request;
     }()
-  }, {
-    key: "get",
-    value: function () {
-      var _get = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(url) {
-        var req, json;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return this.axios.get(url);
+  }], [{
+    key: "getCookie",
+    value: function getCookie(name) {
+      var cookie = {};
+      document.cookie.split(";").forEach(function (el) {
+        var _el$split = el.split("="),
+            _el$split2 = _slicedToArray(_el$split, 2),
+            key = _el$split2[0],
+            value = _el$split2[1];
 
-              case 3:
-                req = _context2.sent;
-                json = req.data;
-                return _context2.abrupt("return", json);
-
-              case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](0);
-                console.log(_context2.t0);
-                throw new Error("Erreur lors de la réception de données");
-
-              case 12:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[0, 8]]);
-      }));
-
-      function get(_x3) {
-        return _get.apply(this, arguments);
-      }
-
-      return get;
-    }()
+        cookie[key.trim()] = value;
+      });
+      return cookie[name];
+    }
   }]);
 
   return Ajax;
@@ -19698,13 +19863,12 @@ var routes = [{
   name: "pages",
   component: _components_admin_Pages_vue__WEBPACK_IMPORTED_MODULE_0__.default
 }, {
-  path: "/admin/page/:id-:name",
+  path: "/admin/page/:id",
   name: "page-edit",
   component: _components_admin_Page_vue__WEBPACK_IMPORTED_MODULE_1__.default,
   props: function props(route) {
     return {
-      id: parseInt(route.params.id),
-      name: route.params.name
+      id: parseInt(route.params.id)
     };
   },
   children: [{

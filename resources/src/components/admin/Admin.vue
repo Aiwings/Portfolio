@@ -2,8 +2,13 @@
   <nav-admin
     @showLogin="loginShown = true"
     @showSignUp="signupShown = true"
+    :isConnected="isConnected"
   ></nav-admin>
-  <Login v-if="loginShown" @login-close="loginShown = false"></Login>
+  <Login
+    v-if="loginShown"
+    @login-close="loginShown = false"
+    @connected="onLogin"
+  ></Login>
   <Signin v-if="signupShown" @signup-close="signupShown = false"></Signin>
   <div class="container top-navbar">
     <router-view></router-view>
@@ -11,6 +16,7 @@
 </template>
 
 <script>
+import Ajax from "@/ajax";
 import NavAdmin from "./Nav.vue";
 import Signin from "./Signin";
 import Login from "./Login.vue";
@@ -24,9 +30,21 @@ export default {
     return {
       loginShown: false,
       signupShown: false,
+      isConnected: false,
     };
   },
-  methods: {},
+  created() {
+    let cookie = Ajax.getCookie("token");
+    console.log(cookie);
+    this.isConnected = cookie !== undefined;
+  },
+
+  methods: {
+    onLogin() {
+      this.isConnected = true;
+      this.loginShown = false;
+    },
+  },
 };
 </script>
 

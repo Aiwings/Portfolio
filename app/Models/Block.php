@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Block extends Model
 {
-    protected $fillables = ["slug", "content"];
+    protected $fillable = ["slug", "content"];
 
     public function page()
     {

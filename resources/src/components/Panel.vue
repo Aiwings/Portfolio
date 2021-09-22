@@ -4,7 +4,7 @@
       <a v-if="hasPrev" href="" @click="$emit('prevClicked')" class="is-light">
         <svg-vue class="iconsvg arrow-left" icon="arrow-left"></svg-vue>
       </a>
-      {{ heading }}
+      {{ title }}
     </div>
     <div class="panel-tabs" v-if="tabs">
       <router-link
@@ -24,9 +24,8 @@
 <script>
 export default {
   props: {
-    heading: {
+    title: {
       type: String,
-      required: true,
     },
     activeTab: {
       type: Number,
@@ -40,6 +39,7 @@ export default {
       type: Array,
     },
   },
+  computed: {},
   methods: {
     buttonClicked() {
       this.$emit("newItem");

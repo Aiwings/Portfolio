@@ -7865,7 +7865,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   }
 }
 html {
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .iconsvg {

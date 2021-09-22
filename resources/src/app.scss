@@ -23,17 +23,17 @@
 @import "~bulma/sass/helpers/_all.sass";
 
 html {
-    overflow-y: hidden;
+  overflow-y: auto;
 }
 .iconsvg {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    stroke-width: 0;
-    stroke: currentColor;
-    fill: currentColor;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
 }
 
 .delete {
-    color: $danger;
+  color: $danger;
 }

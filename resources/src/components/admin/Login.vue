@@ -37,7 +37,7 @@ export default {
     Modal,
     Field,
   },
-  emits: ["loginClose"],
+  emits: ["loginClose", "connected"],
   data() {
     return {
       show: true,
@@ -52,7 +52,7 @@ export default {
     async login() {
       try {
         let ajax = new Ajax();
-        const login = await ajax.post("/api/login", this.form);
+        const login = await ajax.request("/api/login", "POST", this.form);
         if (login.success) {
           let cookieString = `token=${login.token};`;
           cookieString += "samesite=lax;";
@@ -61,6 +61,7 @@ export default {
           cookieString += "secure;";
           document.cookie = cookieString;
           console.log("logged in", login.token);
+          this.$emit("connected");
         } else {
           throw new Error();
         }
