@@ -1,5 +1,9 @@
 <template>
-  <editor :init="init" v-model="content" />
+  <editor
+    :init="init"
+    v-model="content"
+    @change="$emit('update:content', content)"
+  />
 </template>
 
 <script>
@@ -35,9 +39,12 @@ export default {
   components: {
     editor: Editor,
   },
+  props: {
+    content: String,
+  },
+  emits: ["update:content"],
   data() {
     return {
-      content: "",
       init: {
         height: 500,
         branding: false,

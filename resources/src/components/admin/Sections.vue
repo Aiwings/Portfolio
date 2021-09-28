@@ -3,13 +3,13 @@
     class="panel-block"
     v-for="section in sections"
     v-bind:key="section"
-    @click="modify(section.name)"
+    @click="openEditor(section)"
   >
-    {{ section.content }}
+    {{ section }}
   </div>
   <div class="panel-block">
     <button
-      v-on:click="buttonClicked"
+      @click="openEditor('new')"
       class="button is-link is-outlined is-fullwidth"
     >
       AJouter une section
@@ -23,12 +23,7 @@ export default {
   props: {},
   data() {
     return {
-      sections: [
-        {
-          name: "",
-          content: "",
-        },
-      ],
+      sections: [],
     };
   },
   async created() {
@@ -39,10 +34,21 @@ export default {
     try {
       let ajax = new Ajax();
       let req = await ajax.request(`/api/page/${pageId}/sections`);
-      this.sections.concat(req);
+      this.sections = req;
     } catch (err) {
       alert(err.message);
     }
+  },
+  methods: {
+    openEditor(slug) {
+      console.log(slug);
+      this.$router.push({
+        name: "section-edit",
+        params: {
+          slug: slug,
+        },
+      });
+    },
   },
 };
 </script>

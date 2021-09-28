@@ -35,7 +35,7 @@ Route::post('/signup', [AuthController::class, 'signUp']);
 Route::get("/pages", [PageController::class, "index"]);
 Route::get("/page/{id}", [PageController::class, "show"]);
 Route::get("/page/{pageId}/sections", [SectionController::class, "index"]);
-Route::get("/section/{id}", [SectionController::class, "show"]);
+Route::get("/section/{slug}", [SectionController::class, "show"]);
 
 /**
  * Authentifications using user API Token via Included Middleware

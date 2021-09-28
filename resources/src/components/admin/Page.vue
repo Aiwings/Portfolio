@@ -7,12 +7,18 @@
     :hasPrev="true"
     @prevClicked="prev"
   >
-    <router-view :page="page" @pageChanged="pageChanged"></router-view>
+    <page-infos
+      :page="page"
+      @pageChanged="pageChanged"
+      v-if="active == 0"
+    ></page-infos>
+    <router-view v-else></router-view>
   </panel>
 </template>
 
 <script>
 import Panel from "../Panel.vue";
+import PageInfos from "./PageInfos.vue";
 import Ajax from "@/ajax";
 export default {
   props: {
@@ -91,6 +97,7 @@ export default {
   },
   components: {
     panel: Panel,
+    "page-infos": PageInfos,
   },
 };
 </script>

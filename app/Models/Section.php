@@ -12,10 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Section extends Model
 {
-   protected $fillable = ["slug","title","content"];
+   protected $fillable = ["slug","title","content","page_ID"];
 
     public function page()
     {
-        return $this->belongsTo(Page::class);
+        return $this->belongsTo(Page::class, "page_ID");
     }
 }

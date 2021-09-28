@@ -13,7 +13,7 @@ class AddedSection extends Migration
      */
     public function up()
     {
-            Schema::create('section', function (Blueprint $table) {
+            Schema::create('sections', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
             $table->string("slug")->unique();
@@ -23,6 +23,7 @@ class AddedSection extends Migration
                 ->constrained("pages")
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

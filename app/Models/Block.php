@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Block extends Model
 {
-    protected $fillable = ["slug", "content"];
+    protected $fillable = ["slug", "content","page_ID"];
 
     public function page()
     {
-        return $this->belongsTo(Page::class);
+        return $this->belongsTo(Page::class,"page_ID");
     }
 }

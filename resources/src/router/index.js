@@ -9,6 +9,7 @@ import Home from "../components/admin/Home.vue";
 import Sections from "../components/admin/Sections";
 import PageInfos from "../components/admin/PageInfos";
 import PageBlocks from "../components/admin/PageBlocks";
+import SectionEdit from "../components/admin/SectionEdit";
 const routes = [
   { path: "/admin", name: "admin-home", component: Home },
   {
@@ -45,6 +46,14 @@ const routes = [
         path: "sections",
         name: "sections",
         component: Sections,
+      },
+      {
+        path: "section/:slug",
+        name: "section-edit",
+        component: SectionEdit,
+        props: (route) => ({
+          slug: route.params.slug,
+        }),
       },
       {
         path: "blocks",
