@@ -11,16 +11,18 @@ class HomeController extends Controller
 {
     public function index($slug = "home")
     {
-        if($slug == "admin" ) {
-            return view("admin");
-        }
+
         $page = Page::where('slug',$slug)->first();
+       
         $sections = Section::where('page_ID',$page->id)->get();
         $blocks = Block::where('page_ID',$page->id)->get();
         return view('home', [
             "page"=>$page,
-            "sections"=>json_encode($sections),
+            "sections"=>$sections,
             "blocks"=>$blocks
         ]);
+    }
+    public function admin($slug = "" ) {
+        return view('admin');
     }
 }

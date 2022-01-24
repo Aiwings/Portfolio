@@ -67,7 +67,7 @@ export default {
                     cookieString += "samesite=lax;";
                     let maxAge = 7 * 24 * 60 * 60;
                     cookieString += `max-age=${maxAge};`;
-                    cookieString += "secure;";
+                    //cookieString += "secure;";
                     document.cookie = cookieString;
                     console.log("logged in", login.token);
                     this.$emit("connected");

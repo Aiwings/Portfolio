@@ -29,20 +29,37 @@
         </nav>
       </div>
     </section>
+    <section-block
+      v-for="section in sections"
+      :key="section.id" 
+      :title="section.title" 
+      :content="section.content"
+    />
   </main>
 </template>
 
 <script>
 import NavBar from "./NavBar.vue";
+import SectionBlock from './SectionBlock.vue';
 export default {
   components: {
     "nav-bar": NavBar,
+    "section-block": SectionBlock,
   },
   data() {
     return {
-      message: "Hello",
+      sections: [{
+        id:0,
+        title:'',
+        content:""
+      }],
     };
   },
+  created(){
+    const sections_json = document.getElementById("sections").textContent;
+    this.sections = JSON.parse(sections_json);
+  },
+  
 };
 </script>
 

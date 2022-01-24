@@ -21,7 +21,7 @@ Route::get('/{slug}', [HomeController::class, 'index']);
 / Redirects to the admin blade
 / The Vue router handles the redirections
 */
-Route::get('/admin/pages', [HomeController::class, 'index']);
-Route::get('/admin/page/{slug}', [HomeController::class, 'index']);
-Route::get('/admin/projects', [HomeController::class, 'index']);
-Route::get('/admin/projects/{slug}', [HomeController::class, 'index']);
+Route::get('/admin/pages', [HomeController::class, 'admin']);
+Route::get('/admin/page/{slug}', [HomeController::class, 'admin']);
+Route::get('/admin/projects', [HomeController::class, 'admin']);
+Route::get('/admin/projects/{slug}', [HomeController::class, 'admin']);

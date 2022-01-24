@@ -7,13 +7,20 @@
     <meta name="description" content="{{$page->description}}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/app.css" />
-    <title> {{ env('APP_NAME') }}|{{ $page->title }}</title>
+    <title> {{ env('APP_NAME') }} | {{ $page->title }}</title>
 </head>
 
 <body>
+    <noscript>
+        <strong>
+            This Website uses JavaScript. Please enable it to experience it fully.
+            Thank you.
+        </strong>
+    </noscript>
     <div id="app">
         <home-page></home-page>
     </div>
+    <!-- TODO Implements Blocks Features to provide every Field -->
     <script type="application/ld+json">
         {
             "@context": "http://schema.org",
@@ -23,7 +30,7 @@
                 "@type": "Person",
                 "givenName": "Guillaume",
                 "familyName": "ROUX",
-                "jobTitle":"FullStack Developper",
+                "jobTitle": "FullStack Developper",
                 "telephone": "+33628061358",
                 "birthDate": "1992-08-07",
                 "email": "roux.gensou@gmail.com",
@@ -35,7 +42,7 @@
         }
     </script>
     <script id="sections" type="application/json">
-        {{$sections}}
+    @json($sections)
     </script>
     <script src="js/manifest.js"></script>
     <script src="js/vendor.js"></script>
