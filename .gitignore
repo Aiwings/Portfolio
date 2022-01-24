@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 #######################################
 ######      NPM             ##########
 ######################################
-=======
->>>>>>> 8854529e891bd94f5bbd4b233e8ea1ea6d21390d
 # Logs
 logs
 *.log
@@ -108,7 +105,6 @@ dist
 
 # TernJS port file
 .tern-port
-<<<<<<< HEAD
 
 
 
@@ -141,5 +137,3 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-=======
->>>>>>> 8854529e891bd94f5bbd4b233e8ea1ea6d21390d
