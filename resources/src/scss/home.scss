@@ -1,0 +1,21 @@
+.hero-body {
+    flex-direction: column;
+    justify-content: center;
+}
+.gradiant {
+    background: linear-gradient(-45deg, #83b4d5, #684c77, #659bb3, #4f537e);
+    //background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradiantBG 10s ease infinite;
+}
+@keyframes gradiantBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
